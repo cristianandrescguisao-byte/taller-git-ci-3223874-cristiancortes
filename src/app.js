@@ -5,7 +5,7 @@
  * @returns {number}
  */
 export function suma(a, b) {
-    return a + b;
+  return a + b;
 }
 
 /**
@@ -13,13 +13,13 @@ export function suma(a, b) {
  * @param {string} texto - El texto del nuevo ítem de la lista
  */
 export function agregarItem(texto) {
-    const lista = document.getElementById('lista');
-    if (lista) {
-        const nuevoItem = document.createElement('li');
-        nuevoItem.textContent = texto;
-        lista.appendChild(nuevoItem);
-        console.log(`Se agregó: ${texto}`);
-    }
+  const lista = document.getElementById('lista');
+  if (lista) {
+    const nuevoItem = document.createElement('li');
+    nuevoItem.textContent = texto;
+    lista.appendChild(nuevoItem);
+    console.log(`Se agregó: ${texto}`);
+  }
 }
 
-console.log("App lista");
+console.log('App lista');
