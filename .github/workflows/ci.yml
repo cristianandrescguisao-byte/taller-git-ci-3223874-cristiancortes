@@ -1,0 +1,32 @@
+name: Integración Continua (CI)
+
+# El workflow se ejecuta en los eventos de Pull Request y push a main
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  check-format-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      # 1. Configuración de Node.js
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 2. Tarea de Prettier (Formato)
+      - name: Instalar y Verificar Formato con Prettier
+        run: |
+          npm install prettier # Instala prettier
+          npx prettier --check 'src/**/*.{js,html}' # Verifica los archivos modificados
+
+      # 3. Tarea de Pruebas
+      - name: Ejecutar Pruebas Unitarias
+        # Usa node --test que es el runner nativo de Node.js
+        run: node --test tests/suma.test.js
