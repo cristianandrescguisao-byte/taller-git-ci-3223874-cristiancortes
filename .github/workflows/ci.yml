@@ -1,0 +1,32 @@
+name: Integración Continua (CI)
+
+ 
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  check-format-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+       
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+    
+      - name: Instalar y Verificar Formato con Prettier
+        run: |
+          npm install prettier # Instala prettier
+          npx prettier --check 'src/**/*.{js,html}' # Verifica los archivos modificados
+
+      
+      - name: Ejecutar Pruebas Unitarias
+     
+        run: node --test tests/suma.test.js
